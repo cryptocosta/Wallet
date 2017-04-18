@@ -1,0 +1,3 @@
+[submodule "CostaCoin"]
+	path = CostaCoin
+	url = https://github.com/cryptocosta/CostaCoin

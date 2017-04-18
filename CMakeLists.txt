@@ -8,13 +8,13 @@ execute_process(COMMAND git log -1 --pretty=format:%h
 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 OUTPUT_VARIABLE GIT_REVISION)
 
-set(CRYPTONOTE_LIB cryptonote)
+set(CRYPTONOTE_LIB CostaCoinre)
 
 include_directories(${CMAKE_BINARY_DIR}
     src
-    cryptonote/external
-    cryptonote/include
-    cryptonote/src)
+    CostaCoinre/external
+    CostaCoinre/include
+    CostaCoinre/src)
 
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -35,7 +35,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
 set(VERSION "")
-configure_file("cryptonote/src/version.h.in" "version.h")
+configure_file("CostaCoinre/src/version.h.in" "version.h")
 configure_file("src/CryptoNoteWalletConfig.h.in" "CryptoNoteWalletConfig.h")
 
 add_definitions(-DGIT_REVISION=\"${GIT_REVISION}\")
@@ -43,130 +43,130 @@ add_definitions(-DGIT_REVISION=\"${GIT_REVISION}\")
 set(CMAKE_AUTOMOC ON)
 
 set(CRYPTONOTE_SOURCES
-  cryptonote/external/miniupnpc/connecthostport.c
-  cryptonote/external/miniupnpc/igd_desc_parse.c
-  cryptonote/external/miniupnpc/minisoap.c
-  cryptonote/external/miniupnpc/miniupnpc.c
-  cryptonote/external/miniupnpc/miniwget.c
-  cryptonote/external/miniupnpc/minixml.c
-  cryptonote/external/miniupnpc/portlistingparse.c
-  cryptonote/external/miniupnpc/receivedata.c
-  cryptonote/external/miniupnpc/upnpcommands.c
-  cryptonote/external/miniupnpc/upnpreplyparse.c
-  cryptonote/src/Common/Base58.cpp
-  cryptonote/src/Common/CommandLine.cpp
-  cryptonote/src/Common/Util.cpp
-  cryptonote/src/Common/StringTools.cpp
-  cryptonote/src/Common/JsonValue.cpp
-  cryptonote/src/Common/ConsoleTools.cpp
-  cryptonote/src/Common/MemoryInputStream.cpp
-  cryptonote/src/Common/PathTools.cpp
-  cryptonote/src/Common/StdInputStream.cpp
-  cryptonote/src/Common/StdOutputStream.cpp
-  cryptonote/src/Common/StreamTools.cpp
-  cryptonote/src/Common/StringOutputStream.cpp
-  cryptonote/src/Common/StringView.cpp
-  cryptonote/src/Common/VectorOutputStream.cpp
-  cryptonote/src/crypto/blake256.c
-  cryptonote/src/crypto/chacha8.c
-  cryptonote/src/crypto/crypto-ops-data.c
-  cryptonote/src/crypto/crypto-ops.c
-  cryptonote/src/crypto/crypto.cpp
-  cryptonote/src/crypto/groestl.c
-  cryptonote/src/crypto/hash-extra-blake.c
-  cryptonote/src/crypto/hash-extra-groestl.c
-  cryptonote/src/crypto/hash-extra-jh.c
-  cryptonote/src/crypto/hash-extra-skein.c
-  cryptonote/src/crypto/hash.c
-  cryptonote/src/crypto/jh.c
-  cryptonote/src/crypto/keccak.c
-  cryptonote/src/crypto/oaes_lib.c
-  cryptonote/src/crypto/random.c
-  cryptonote/src/crypto/skein.c
-  cryptonote/src/crypto/slow-hash.c
-  cryptonote/src/crypto/slow-hash.cpp
-  cryptonote/src/crypto/tree-hash.c
-  cryptonote/src/CryptoNoteCore/BlockchainIndices.cpp
-  cryptonote/src/CryptoNoteCore/BlockchainMessages.cpp
-  cryptonote/src/CryptoNoteCore/BlockIndex.cpp
-  cryptonote/src/CryptoNoteCore/CoreConfig.cpp
-  cryptonote/src/CryptoNoteCore/CryptoNoteBasic.cpp
-  cryptonote/src/CryptoNoteCore/CryptoNoteTools.cpp
-  cryptonote/src/CryptoNoteCore/Currency.cpp
-  cryptonote/src/CryptoNoteCore/MinerConfig.cpp
-  cryptonote/src/CryptoNoteCore/Transaction.cpp
-  cryptonote/src/CryptoNoteCore/Account.cpp
-  cryptonote/src/CryptoNoteCore/Blockchain.cpp
-  cryptonote/src/CryptoNoteCore/Checkpoints.cpp
-  cryptonote/src/CryptoNoteCore/CryptoNoteBasicImpl.cpp
-  cryptonote/src/CryptoNoteCore/Core.cpp
-  cryptonote/src/CryptoNoteCore/CryptoNoteFormatUtils.cpp
-  cryptonote/src/CryptoNoteCore/CryptoNoteSerialization.cpp
-  cryptonote/src/CryptoNoteCore/Difficulty.cpp
-  cryptonote/src/CryptoNoteCore/IBlock.cpp
-  cryptonote/src/CryptoNoteCore/Miner.cpp
-  cryptonote/src/CryptoNoteCore/TransactionExtra.cpp
-  cryptonote/src/CryptoNoteCore/TransactionPool.cpp
-  cryptonote/src/CryptoNoteCore/TransactionPrefixImpl.cpp
-  cryptonote/src/CryptoNoteCore/TransactionUtils.cpp
-  cryptonote/src/InProcessNode/InProcessNode.cpp
-  cryptonote/src/InProcessNode/InProcessNodeErrors.cpp
-  cryptonote/src/NodeRpcProxy/NodeErrors.cpp
-  cryptonote/src/NodeRpcProxy/NodeRpcProxy.cpp
-  cryptonote/src/P2p/NetNodeConfig.cpp
-  cryptonote/src/Serialization/BinaryInputStreamSerializer.cpp
-  cryptonote/src/Serialization/BinaryOutputStreamSerializer.cpp
-  cryptonote/src/Serialization/JsonInputValueSerializer.cpp
-  cryptonote/src/Serialization/JsonOutputStreamSerializer.cpp
-  cryptonote/src/Serialization/KVBinaryInputStreamSerializer.cpp
-  cryptonote/src/Serialization/KVBinaryOutputStreamSerializer.cpp
-  cryptonote/src/Serialization/SerializationOverloads.cpp
-  cryptonote/src/Transfers/BlockchainSynchronizer.cpp
-  cryptonote/src/Transfers/SynchronizationState.cpp
-  cryptonote/src/Transfers/TransfersConsumer.cpp
-  cryptonote/src/Transfers/TransfersContainer.cpp
-  cryptonote/src/Transfers/TransfersSubscription.cpp
-  cryptonote/src/Transfers/TransfersSynchronizer.cpp
-  cryptonote/src/Wallet/LegacyKeysImporter.cpp
-  cryptonote/src/Wallet/WalletAsyncContextCounter.cpp
-  cryptonote/src/Wallet/WalletErrors.cpp
-  cryptonote/src/WalletLegacy/KeysStorage.cpp
-  cryptonote/src/WalletLegacy/WalletLegacy.cpp
-  cryptonote/src/WalletLegacy/WalletHelper.cpp
-  cryptonote/src/WalletLegacy/WalletLegacySerializer.cpp
-  cryptonote/src/WalletLegacy/WalletLegacySerialization.cpp
-  cryptonote/src/WalletLegacy/WalletTransactionSender.cpp
-  cryptonote/src/WalletLegacy/WalletUnconfirmedTransactions.cpp
-  cryptonote/src/WalletLegacy/WalletUserTransactionsCache.cpp
-  cryptonote/src/System/ContextGroup.cpp
-  cryptonote/src/System/Event.cpp
-  cryptonote/src/System/EventLock.cpp
-  cryptonote/src/System/InterruptedException.cpp
-  cryptonote/src/System/Ipv4Address.cpp
-  cryptonote/src/System/TcpStream.cpp
-  cryptonote/src/HTTP/HttpRequest.cpp
-  cryptonote/src/HTTP/HttpParser.cpp
-  cryptonote/src/HTTP/HttpParserErrorCodes.cpp
-  cryptonote/src/HTTP/HttpResponse.cpp
-  cryptonote/src/Rpc/HttpClient.cpp
-  cryptonote/src/Rpc/JsonRpc.cpp
-  cryptonote/src/P2p/NetNode.cpp
-  cryptonote/src/P2p/LevinProtocol.cpp
-  cryptonote/src/P2p/NetNodeConfig.cpp
-  cryptonote/src/P2p/PeerListManager.cpp
-  cryptonote/src/CryptoNoteProtocol/CryptoNoteProtocolHandler.cpp
-  cryptonote/src/Logging/ILogger.cpp
-  cryptonote/src/Logging/LoggerGroup.cpp
-  cryptonote/src/Logging/CommonLogger.cpp
-  cryptonote/src/Logging/LoggerManager.cpp
-  cryptonote/src/Logging/FileLogger.cpp
-  cryptonote/src/Logging/StreamLogger.cpp
-  cryptonote/src/Logging/ConsoleLogger.cpp
-  cryptonote/src/Logging/LoggerMessage.cpp
-  cryptonote/src/Logging/LoggerRef.cpp
-  cryptonote/src/BlockchainExplorer/BlockchainExplorer.cpp
-  cryptonote/src/BlockchainExplorer/BlockchainExplorerDataBuilder.cpp
-  cryptonote/src/BlockchainExplorer/BlockchainExplorerErrors.cpp
+  CostaCoinre/external/miniupnpc/connecthostport.c
+  CostaCoinre/external/miniupnpc/igd_desc_parse.c
+  CostaCoinre/external/miniupnpc/minisoap.c
+  CostaCoinre/external/miniupnpc/miniupnpc.c
+  CostaCoinre/external/miniupnpc/miniwget.c
+  CostaCoinre/external/miniupnpc/minixml.c
+  CostaCoinre/external/miniupnpc/portlistingparse.c
+  CostaCoinre/external/miniupnpc/receivedata.c
+  CostaCoinre/external/miniupnpc/upnpcommands.c
+  CostaCoinre/external/miniupnpc/upnpreplyparse.c
+  CostaCoinre/src/Common/Base58.cpp
+  CostaCoinre/src/Common/CommandLine.cpp
+  CostaCoinre/src/Common/Util.cpp
+  CostaCoinre/src/Common/StringTools.cpp
+  CostaCoinre/src/Common/JsonValue.cpp
+  CostaCoinre/src/Common/ConsoleTools.cpp
+  CostaCoinre/src/Common/MemoryInputStream.cpp
+  CostaCoinre/src/Common/PathTools.cpp
+  CostaCoinre/src/Common/StdInputStream.cpp
+  CostaCoinre/src/Common/StdOutputStream.cpp
+  CostaCoinre/src/Common/StreamTools.cpp
+  CostaCoinre/src/Common/StringOutputStream.cpp
+  CostaCoinre/src/Common/StringView.cpp
+  CostaCoinre/src/Common/VectorOutputStream.cpp
+  CostaCoinre/src/crypto/blake256.c
+  CostaCoinre/src/crypto/chacha8.c
+  CostaCoinre/src/crypto/crypto-ops-data.c
+  CostaCoinre/src/crypto/crypto-ops.c
+  CostaCoinre/src/crypto/crypto.cpp
+  CostaCoinre/src/crypto/groestl.c
+  CostaCoinre/src/crypto/hash-extra-blake.c
+  CostaCoinre/src/crypto/hash-extra-groestl.c
+  CostaCoinre/src/crypto/hash-extra-jh.c
+  CostaCoinre/src/crypto/hash-extra-skein.c
+  CostaCoinre/src/crypto/hash.c
+  CostaCoinre/src/crypto/jh.c
+  CostaCoinre/src/crypto/keccak.c
+  CostaCoinre/src/crypto/oaes_lib.c
+  CostaCoinre/src/crypto/random.c
+  CostaCoinre/src/crypto/skein.c
+  CostaCoinre/src/crypto/slow-hash.c
+  CostaCoinre/src/crypto/slow-hash.cpp
+  CostaCoinre/src/crypto/tree-hash.c
+  CostaCoinre/src/CryptoNoteCore/BlockchainIndices.cpp
+  CostaCoinre/src/CryptoNoteCore/BlockchainMessages.cpp
+  CostaCoinre/src/CryptoNoteCore/BlockIndex.cpp
+  CostaCoinre/src/CryptoNoteCore/CoreConfig.cpp
+  CostaCoinre/src/CryptoNoteCore/CryptoNoteBasic.cpp
+  CostaCoinre/src/CryptoNoteCore/CryptoNoteTools.cpp
+  CostaCoinre/src/CryptoNoteCore/Currency.cpp
+  CostaCoinre/src/CryptoNoteCore/MinerConfig.cpp
+  CostaCoinre/src/CryptoNoteCore/Transaction.cpp
+  CostaCoinre/src/CryptoNoteCore/Account.cpp
+  CostaCoinre/src/CryptoNoteCore/Blockchain.cpp
+  CostaCoinre/src/CryptoNoteCore/Checkpoints.cpp
+  CostaCoinre/src/CryptoNoteCore/CryptoNoteBasicImpl.cpp
+  CostaCoinre/src/CryptoNoteCore/Core.cpp
+  CostaCoinre/src/CryptoNoteCore/CryptoNoteFormatUtils.cpp
+  CostaCoinre/src/CryptoNoteCore/CryptoNoteSerialization.cpp
+  CostaCoinre/src/CryptoNoteCore/Difficulty.cpp
+  CostaCoinre/src/CryptoNoteCore/IBlock.cpp
+  CostaCoinre/src/CryptoNoteCore/Miner.cpp
+  CostaCoinre/src/CryptoNoteCore/TransactionExtra.cpp
+  CostaCoinre/src/CryptoNoteCore/TransactionPool.cpp
+  CostaCoinre/src/CryptoNoteCore/TransactionPrefixImpl.cpp
+  CostaCoinre/src/CryptoNoteCore/TransactionUtils.cpp
+  CostaCoinre/src/InProcessNode/InProcessNode.cpp
+  CostaCoinre/src/InProcessNode/InProcessNodeErrors.cpp
+  CostaCoinre/src/NodeRpcProxy/NodeErrors.cpp
+  CostaCoinre/src/NodeRpcProxy/NodeRpcProxy.cpp
+  CostaCoinre/src/P2p/NetNodeConfig.cpp
+  CostaCoinre/src/Serialization/BinaryInputStreamSerializer.cpp
+  CostaCoinre/src/Serialization/BinaryOutputStreamSerializer.cpp
+  CostaCoinre/src/Serialization/JsonInputValueSerializer.cpp
+  CostaCoinre/src/Serialization/JsonOutputStreamSerializer.cpp
+  CostaCoinre/src/Serialization/KVBinaryInputStreamSerializer.cpp
+  CostaCoinre/src/Serialization/KVBinaryOutputStreamSerializer.cpp
+  CostaCoinre/src/Serialization/SerializationOverloads.cpp
+  CostaCoinre/src/Transfers/BlockchainSynchronizer.cpp
+  CostaCoinre/src/Transfers/SynchronizationState.cpp
+  CostaCoinre/src/Transfers/TransfersConsumer.cpp
+  CostaCoinre/src/Transfers/TransfersContainer.cpp
+  CostaCoinre/src/Transfers/TransfersSubscription.cpp
+  CostaCoinre/src/Transfers/TransfersSynchronizer.cpp
+  CostaCoinre/src/Wallet/LegacyKeysImporter.cpp
+  CostaCoinre/src/Wallet/WalletAsyncContextCounter.cpp
+  CostaCoinre/src/Wallet/WalletErrors.cpp
+  CostaCoinre/src/WalletLegacy/KeysStorage.cpp
+  CostaCoinre/src/WalletLegacy/WalletLegacy.cpp
+  CostaCoinre/src/WalletLegacy/WalletHelper.cpp
+  CostaCoinre/src/WalletLegacy/WalletLegacySerializer.cpp
+  CostaCoinre/src/WalletLegacy/WalletLegacySerialization.cpp
+  CostaCoinre/src/WalletLegacy/WalletTransactionSender.cpp
+  CostaCoinre/src/WalletLegacy/WalletUnconfirmedTransactions.cpp
+  CostaCoinre/src/WalletLegacy/WalletUserTransactionsCache.cpp
+  CostaCoinre/src/System/ContextGroup.cpp
+  CostaCoinre/src/System/Event.cpp
+  CostaCoinre/src/System/EventLock.cpp
+  CostaCoinre/src/System/InterruptedException.cpp
+  CostaCoinre/src/System/Ipv4Address.cpp
+  CostaCoinre/src/System/TcpStream.cpp
+  CostaCoinre/src/HTTP/HttpRequest.cpp
+  CostaCoinre/src/HTTP/HttpParser.cpp
+  CostaCoinre/src/HTTP/HttpParserErrorCodes.cpp
+  CostaCoinre/src/HTTP/HttpResponse.cpp
+  CostaCoinre/src/Rpc/HttpClient.cpp
+  CostaCoinre/src/Rpc/JsonRpc.cpp
+  CostaCoinre/src/P2p/NetNode.cpp
+  CostaCoinre/src/P2p/LevinProtocol.cpp
+  CostaCoinre/src/P2p/NetNodeConfig.cpp
+  CostaCoinre/src/P2p/PeerListManager.cpp
+  CostaCoinre/src/CryptoNoteProtocol/CryptoNoteProtocolHandler.cpp
+  CostaCoinre/src/Logging/ILogger.cpp
+  CostaCoinre/src/Logging/LoggerGroup.cpp
+  CostaCoinre/src/Logging/CommonLogger.cpp
+  CostaCoinre/src/Logging/LoggerManager.cpp
+  CostaCoinre/src/Logging/FileLogger.cpp
+  CostaCoinre/src/Logging/StreamLogger.cpp
+  CostaCoinre/src/Logging/ConsoleLogger.cpp
+  CostaCoinre/src/Logging/LoggerMessage.cpp
+  CostaCoinre/src/Logging/LoggerRef.cpp
+  CostaCoinre/src/BlockchainExplorer/BlockchainExplorer.cpp
+  CostaCoinre/src/BlockchainExplorer/BlockchainExplorerDataBuilder.cpp
+  CostaCoinre/src/BlockchainExplorer/BlockchainExplorerErrors.cpp
 )
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
@@ -184,7 +184,7 @@ if (WIN32)
 	message(FATAL_ERROR "Only MSVC is supported on this platform")
   endif ()
   add_definitions(/D_CRT_SECURE_NO_WARNINGS /D_WIN32_WINNT=0x0600 /DSTATICLIB)
-  include_directories(cryptonote/src/platform/msc)
+  include_directories(CostaCoinre/src/platform/msc)
 
   set(PLATFORM_DIR Windows)
   set(BUILD_PLATFORM WIN32)
@@ -192,7 +192,7 @@ if (WIN32)
   set(QTMAIN Qt5::WinMain)
 
 elseif (UNIX)
-  set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} cryptonote/external/miniupnpc/minissdpc.c)
+  set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} CostaCoinre/external/miniupnpc/minissdpc.c)
   if (APPLE)
     enable_language(ASM)
     file(GLOB_RECURSE OBJC_SOURCES src/*.mm)
@@ -212,7 +212,7 @@ elseif (UNIX)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -maes -D_DARWIN_C_SOURCE")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework OpenGL -framework CoreFoundation -framework Carbon -framework IOKit -L/usr/lib")
 
-    set(MACOSX_BUNDLE_ICON_FILE cryptonote.icns)
+    set(MACOSX_BUNDLE_ICON_FILE CostaCoinre.icns)
     set(APPLICATION_ICON src/images/cryptonote.icns)
     set_source_files_properties(${APPLICATION_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
@@ -228,8 +228,8 @@ elseif (UNIX)
   endif (APPLE)
 endif ()
 
-include_directories(cryptonote/src/Platform/${PLATFORM_DIR})
-file(GLOB PLATFORM_SOURCES cryptonote/src/Platform/${PLATFORM_DIR}/System/*)
+include_directories(CostaCoinre/src/Platform/${PLATFORM_DIR})
+file(GLOB PLATFORM_SOURCES CostaCoinre/src/Platform/${PLATFORM_DIR}/System/*)
 set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} ${PLATFORM_SOURCES})
 
 add_library(${CRYPTONOTE_LIB} STATIC ${CRYPTONOTE_SOURCES})
